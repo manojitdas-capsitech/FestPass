@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FestPass.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3753169e5145fd709ce14dd69a0e41dd4f68f3f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c17a555c5c1da00bd7fc19de97ab49c9f575f7a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("FestPass.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FestPass.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
