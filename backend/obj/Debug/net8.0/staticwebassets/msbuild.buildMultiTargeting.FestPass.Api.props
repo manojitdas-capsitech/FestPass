@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FestPass.Api.props" />
+</Project>
