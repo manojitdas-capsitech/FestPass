@@ -32,3 +32,9 @@ C:\festpass\backend\obj\Debug\net8.0\refint\backend.dll
 C:\festpass\backend\obj\Debug\net8.0\backend.pdb
 C:\festpass\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\festpass\backend\obj\Debug\net8.0\ref\backend.dll
+C:\festpass\backend\bin\Debug\net8.0\DnsClient.dll
+C:\festpass\backend\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\festpass\backend\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\festpass\backend\bin\Debug\net8.0\SharpCompress.dll
+C:\festpass\backend\bin\Debug\net8.0\Snappier.dll
+C:\festpass\backend\bin\Debug\net8.0\ZstdSharp.dll
