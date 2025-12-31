@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "vquKESN8/amyM7Win+CFU8Yb91W9RqFunNhIMFDuN68=",
-  "Source": "FestPass.Api",
-  "BasePath": "_content/FestPass.Api",
+  "Hash": "7/yvsnDRTixX0vVer35KSjS1HzfM4rGxA/gc1emwSdw=",
+  "Source": "backend",
+  "BasePath": "_content/backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

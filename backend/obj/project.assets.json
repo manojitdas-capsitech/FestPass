@@ -487,9 +487,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\festpass\\backend\\FestPass.Api.csproj",
-      "projectName": "FestPass.Api",
-      "projectPath": "C:\\festpass\\backend\\FestPass.Api.csproj",
+      "projectUniqueName": "C:\\festpass\\backend\\backend.csproj",
+      "projectName": "backend",
+      "projectPath": "C:\\festpass\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\CT_USER\\.nuget\\packages\\",
       "outputPath": "C:\\festpass\\backend\\obj\\",
       "projectStyle": "PackageReference",
