@@ -31,3 +31,4 @@ C:\festpass\backend\obj\Debug\net8.0\refint\FestPass.Api.dll
 C:\festpass\backend\obj\Debug\net8.0\FestPass.Api.pdb
 C:\festpass\backend\obj\Debug\net8.0\FestPass.Api.genruntimeconfig.cache
 C:\festpass\backend\obj\Debug\net8.0\ref\FestPass.Api.dll
+C:\festpass\backend\obj\Debug\net8.0\FestPass.Api.sourcelink.json
