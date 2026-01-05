@@ -5,8 +5,9 @@ namespace backend.Models.Entities
     public class Ticket
     {
         [BsonId]
-        public ObjectId Id { get; set; }
-
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
+        public string FestId { get; set; } = null!;
         public string TicketCode { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;
         public TicketType TicketType { get; set; }

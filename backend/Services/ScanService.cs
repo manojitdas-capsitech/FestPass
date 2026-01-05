@@ -18,7 +18,7 @@ namespace backend.Services
         }
 
         // ENTRY SCAN
-        public async Task<ScanResponseDto> HandleEntryScanAsync(string ticketCode)
+        public async Task<ScanResponseDto> HandleEntryScanAsync(string ticketCode, string festId)
         {
             var ticket = await _context.Tickets
                 .Find(t => t.TicketCode == ticketCode && t.Status == TicketStatus.Active)
@@ -28,6 +28,9 @@ namespace backend.Services
             {
                 return Fail("Invalid or inactive ticket");
             }
+
+            if (ticket.FestId != festId)
+                return Fail("Ticket does not belong to this fest");
 
             if (ticket.EntryUsedForSession)
             {
@@ -44,78 +47,83 @@ namespace backend.Services
             );
 
             // Log scan
-            await LogScan(ticketCode, ScanType.Entry);
+            await LogScan(ticketCode, ScanType.Entry, festId);
 
             return Success("Entry allowed");
         }
 
         // FOOD SCAN
-        public async Task<ScanResponseDto> HandleFoodScanAsync(string ticketCode)
+        public async Task<ScanResponseDto> HandleFoodScanAsync(string ticketCode, string festId)
         {
             var ticket = await _context.Tickets
                 .Find(t => t.TicketCode == ticketCode && t.Status == TicketStatus.Active)
                 .FirstOrDefaultAsync();
 
             if (ticket == null)
-            {
                 return Fail("Invalid or inactive ticket");
-            }
+
+            if (ticket.FestId != festId)
+                return Fail("Ticket does not belong to this fest");
 
             if (!ticket.EntryUsedForSession)
-            {
                 return Fail("Entry not recorded for current session");
-            }
 
-            // Detect active meal slot by server time
-            var now = DateTime.UtcNow.TimeOfDay;
+            // 🔹 Fetch fest with meals
+            var fest = await _context.Fests
+                .Find(f => f.Id == festId && f.IsActive)
+                .FirstOrDefaultAsync();
 
-            var mealSlot = await _context.MealSlots.Find(slot =>
-                now >= slot.StartTime &&
-                now <= slot.EndTime
-            ).FirstOrDefaultAsync();
+            if (fest == null)
+                return Fail("Fest not found or inactive");
 
-            if (mealSlot == null)
-            {
-                return Fail("Food service not available at this time");
-            }
+            // 🔹 Use LOCAL date & time
+            var now = DateTime.Now;
+            var today = now.Date;
+            var currentTime = now.TimeOfDay;
 
-            if (ticket.ConsumedMealSlotIds.Contains(mealSlot.Id))
-            {
-                return Fail("Meal already consumed for this slot");
-            }
-
-            // Add consumed meal slot
-            var update = Builders<Ticket>.Update
-                .AddToSet(t => t.ConsumedMealSlotIds, mealSlot.Id);
-
-            await _context.Tickets.UpdateOneAsync(
-                t => t.TicketCode == ticketCode,
-                update
+            // 🔹 Find today’s active meal
+            var mealSlot = fest.MealSlots.FirstOrDefault(slot =>
+                slot.Date.Date == today &&
+                currentTime >= slot.StartTime &&
+                currentTime <= slot.EndTime
             );
 
-            // Log meal consumption
-            var mealConsumption = new MealConsumption
+            if (mealSlot == null)
+                return Fail("Food service not available at this time");
+
+            if (ticket.ConsumedMealSlotIds.Contains(mealSlot.Id))
+                return Fail("Meal already consumed for this slot");
+
+            // 🔹 Mark meal consumed
+            await _context.Tickets.UpdateOneAsync(
+                t => t.TicketCode == ticketCode,
+                Builders<Ticket>.Update.AddToSet(
+                    t => t.ConsumedMealSlotIds,
+                    mealSlot.Id
+                )
+            );
+
+            await _context.MealConsumptions.InsertOneAsync(new MealConsumption
             {
                 TicketCode = ticketCode,
                 MealSlotId = mealSlot.Id,
                 ConsumedAt = DateTime.UtcNow
-            };
+            });
 
-            await _context.MealConsumptions.InsertOneAsync(mealConsumption);
-
-            // Log scan
-            await LogScan(ticketCode, ScanType.Food);
+            await LogScan(ticketCode, ScanType.Food, festId);
 
             return Success($"Food allowed: {mealSlot.MealType}");
         }
 
+
         // -------- HELPERS --------
 
-        private async Task LogScan(string ticketCode, ScanType scanType)
+        private async Task LogScan(string ticketCode, ScanType scanType, string festId)
         {
             var log = new ScanLog
             {
                 TicketCode = ticketCode,
+                FestId = festId,
                 ScanType = scanType,
                 ScannedAt = DateTime.UtcNow,
                 ScannedBy = "SYSTEM"

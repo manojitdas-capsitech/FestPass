@@ -25,8 +25,13 @@ namespace backend.Controllers
                 return BadRequest("TicketCode is required");
             }
 
-            var result = await _scanService.HandleEntryScanAsync(request.TicketCode);
+            if (string.IsNullOrWhiteSpace(request.FestId))
+                return BadRequest("FestId is required");
 
+            var result = await _scanService.HandleEntryScanAsync(
+                request.TicketCode,
+                request.FestId
+            );
             if (!result.IsSuccess)
             {
                 return BadRequest(result);
@@ -44,8 +49,13 @@ namespace backend.Controllers
                 return BadRequest("TicketCode is required");
             }
 
-            var result = await _scanService.HandleFoodScanAsync(request.TicketCode);
+            if (string.IsNullOrWhiteSpace(request.FestId))
+                return BadRequest("FestId is required");
 
+            var result = await _scanService.HandleFoodScanAsync(
+                request.TicketCode,
+                request.FestId
+            );
             if (!result.IsSuccess)
             {
                 return BadRequest(result);

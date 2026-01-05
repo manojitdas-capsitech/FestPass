@@ -29,6 +29,8 @@ namespace backend.Controllers
 
             return Ok(new
             {
+                ticket.Id,
+                ticket.FestId,
                 ticket.TicketCode,
                 ticket.TicketType,
                 ticket.UserEmail,

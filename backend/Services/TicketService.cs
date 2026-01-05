@@ -17,11 +17,21 @@ namespace backend.Services
 
         public async Task<Ticket> AssignTicketAsync(AssignTicketDto dto)
         {
+
+            // Validate fest exists
+            var festExists = await _context.Fests
+                .Find(f => f.Id == dto.FestId && f.IsActive)
+                .AnyAsync();
+
+            if (!festExists)
+                throw new Exception("Invalid or inactive fest");
+                
             // Generate unique ticket code
             var ticketCode = GenerateTicketCode(dto.TicketType);
 
             var ticket = new Ticket
             {
+                FestId = dto.FestId,
                 TicketCode = ticketCode,
                 UserEmail = dto.UserEmail.ToLower(),
                 TicketType = dto.TicketType,
