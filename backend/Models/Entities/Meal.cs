@@ -3,11 +3,12 @@ namespace backend.Models.Entities
     public class MealSlot
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public int DayNumber { get; set; }
-        public string MealType { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public MealType MealType { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
     }
+
 
     public class MealConsumption
     {

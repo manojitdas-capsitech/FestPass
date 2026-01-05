@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-
     [ApiController]
     [Route("api/fest")]
     public class FestController : ControllerBase
@@ -16,33 +15,12 @@ namespace backend.Controllers
             _festService = festService;
         }
 
+        // SUPER ADMIN: Create Fest (Single API)
         [HttpPost]
-        public async Task<IActionResult> CreateFest(CreateFestDto dto)
+        public async Task<IActionResult> CreateFest([FromBody] CreateFestDto dto)
         {
             var fest = await _festService.CreateFestAsync(dto);
             return Ok(fest);
         }
-
-        [HttpPost("{festId}/day")]
-        public async Task<IActionResult> AddFestDay(string festId, CreateFestDayDto dto)
-        {
-            var success = await _festService.AddFestDayAsync(festId, dto);
-            return success ? Ok("Fest day added") : BadRequest();
-        }
-
-        [HttpPost("{festId}/session")]
-        public async Task<IActionResult> AddSession(string festId, CreateSessionDto dto)
-        {
-            var success = await _festService.AddSessionAsync(festId, dto);
-            return success ? Ok("Session added") : BadRequest();
-        }
-
-        [HttpPost("meal-slot")]
-        public async Task<IActionResult> AddMealSlot(CreateMealSlotDto dto)
-        {
-            await _festService.AddMealSlotAsync(dto);
-            return Ok("Meal slot added");
-        }
     }
 }
-

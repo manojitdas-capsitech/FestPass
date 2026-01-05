@@ -31,6 +31,14 @@ namespace backend.Models
         Food
     }
 
+    public enum MealType
+    {
+        Breakfast,
+        Lunch,
+        EveningSnacks,
+        Dinner
+    }
+
 
 }
 

@@ -8,6 +8,7 @@ namespace backend.Models.Entities
         public ObjectId Id { get; set; }
 
         public string TicketCode { get; set; } = string.Empty;
+        public string UserEmail { get; set; } = string.Empty;
         public TicketType TicketType { get; set; }
         public TicketStatus Status { get; set; }
 

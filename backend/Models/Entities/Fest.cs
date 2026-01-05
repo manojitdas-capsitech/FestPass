@@ -12,8 +12,8 @@ namespace backend.Models.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public List<FestDay> Days { get; set; } = new();
         public List<Session> Sessions { get; set; } = new();
+        public List<MealSlot> MealSlots { get; set; } = new();
 
         public bool IsActive { get; set; }
     }

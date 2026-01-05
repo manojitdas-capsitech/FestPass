@@ -23,6 +23,7 @@ namespace backend.Services
             var ticket = new Ticket
             {
                 TicketCode = ticketCode,
+                UserEmail = dto.UserEmail.ToLower(),
                 TicketType = dto.TicketType,
                 Status = TicketStatus.Active,
                 EntryUsedForSession = false,

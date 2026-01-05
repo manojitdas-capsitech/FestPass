@@ -31,6 +31,7 @@ namespace backend.Controllers
             {
                 ticket.TicketCode,
                 ticket.TicketType,
+                ticket.UserEmail,
                 ticket.SeatNumber
             });
         }
