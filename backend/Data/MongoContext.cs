@@ -28,12 +28,15 @@ namespace backend.Data
 
         public IMongoCollection<MealSlot> MealSlots =>
             _database.GetCollection<MealSlot>("mealSlots");
-
+    
         public IMongoCollection<ScanLog> ScanLogs =>
             _database.GetCollection<ScanLog>("scanLogs");
 
         public IMongoCollection<MealConsumption> MealConsumptions =>
             _database.GetCollection<MealConsumption>("mealConsumptions");
+
+        public IMongoCollection<User> Users =>
+            _database.GetCollection<User>("users");
     }
 
 }

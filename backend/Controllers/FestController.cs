@@ -1,11 +1,14 @@
 using backend.DTOs;
+using backend.Models;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
     [ApiController]
     [Route("api/fest")]
+    [Authorize(Roles = "SuperAdmin")]
     public class FestController : ControllerBase
     {
         private readonly FestService _festService;

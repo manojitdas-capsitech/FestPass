@@ -25,7 +25,7 @@ namespace backend.Services
 
             if (!festExists)
                 throw new Exception("Invalid or inactive fest");
-                
+
             // Generate unique ticket code
             var ticketCode = GenerateTicketCode(dto.TicketType);
 
@@ -49,6 +49,14 @@ namespace backend.Services
         public async Task<List<Ticket>> GetAllTicketsAsync()
         {
             return await _context.Tickets.Find(_ => true).ToListAsync();
+        }
+
+        public async Task<List<Ticket>> GetTicketsByUserEmailAsync(string userEmail)
+        {
+            return await _context.Tickets
+                .Find(t => string.Equals(t.UserEmail, userEmail, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
+
         }
 
         public async Task<bool> BlockTicketAsync(string ticketCode)

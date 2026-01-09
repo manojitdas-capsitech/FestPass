@@ -9,6 +9,17 @@ namespace backend.Data
     {
         public static void CreateIndexes(MongoContext context)
         {
+            // User email must be unique
+            var userEmailIndex = Builders<User>.IndexKeys.Ascending(u => u.Email);
+
+            context.Users.Indexes.CreateOne(
+                new CreateIndexModel<User>(
+                    userEmailIndex,
+                    new CreateIndexOptions { Unique = true }
+                )
+            );
+
+
             // TicketCode must be unique
             var ticketIndex = Builders<Ticket>.IndexKeys.Ascending(t => t.TicketCode);
             context.Tickets.Indexes.CreateOne(

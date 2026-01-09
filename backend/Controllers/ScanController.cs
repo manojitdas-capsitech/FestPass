@@ -1,5 +1,6 @@
 using backend.DTOs;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -7,6 +8,7 @@ namespace backend.Controllers
 
     [ApiController]
     [Route("api/scan")]
+    [Authorize(Roles = "Staff")]
     public class ScanController : ControllerBase
     {
         private readonly ScanService _scanService;

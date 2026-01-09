@@ -38,3 +38,11 @@ C:\festpass\backend\bin\Debug\net8.0\MongoDB.Driver.dll
 C:\festpass\backend\bin\Debug\net8.0\SharpCompress.dll
 C:\festpass\backend\bin\Debug\net8.0\Snappier.dll
 C:\festpass\backend\bin\Debug\net8.0\ZstdSharp.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\festpass\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\festpass\backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

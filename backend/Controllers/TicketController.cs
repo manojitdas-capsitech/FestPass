@@ -46,6 +46,19 @@ namespace backend.Controllers
             return Ok(tickets);
         }
 
+        // Attendee: View all his tickets
+        [HttpGet("attendee")]
+        public async Task<IActionResult> GetAttendeeTickets()
+        {
+            var userEmail = User.FindFirst("email")?.Value;
+
+            if (string.IsNullOrEmpty(userEmail))
+                return Unauthorized();
+
+            var tickets = await _ticketService.GetTicketsByUserEmailAsync(userEmail);
+            return Ok(tickets);
+        }
+
         // ADMIN: Block ticket
         [HttpPost("{ticketCode}/block")]
         public async Task<IActionResult> BlockTicket(string ticketCode)
