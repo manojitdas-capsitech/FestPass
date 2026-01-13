@@ -1,5 +1,6 @@
 using backend.DTOs;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -17,6 +18,7 @@ namespace backend.Controllers
         }
 
         // ADMIN: Assign ticket
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [HttpPost]
         public async Task<IActionResult> AssignTicket([FromBody] AssignTicketDto request)
         {
@@ -39,6 +41,7 @@ namespace backend.Controllers
         }
 
         // ADMIN: View all tickets
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> GetAllTickets()
         {
@@ -47,7 +50,8 @@ namespace backend.Controllers
         }
 
         // Attendee: View all his tickets
-        [HttpGet("attendee")]
+        [AllowAnonymous]
+        [HttpGet("email")]
         public async Task<IActionResult> GetAttendeeTickets()
         {
             var userEmail = User.FindFirst("email")?.Value;
@@ -60,6 +64,7 @@ namespace backend.Controllers
         }
 
         // ADMIN: Block ticket
+        [Authorize(Roles = "Admin, SuperAdmin")]
         [HttpPost("{ticketCode}/block")]
         public async Task<IActionResult> BlockTicket(string ticketCode)
         {

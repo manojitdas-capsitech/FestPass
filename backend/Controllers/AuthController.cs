@@ -1,12 +1,12 @@
 using backend.DTOs;
 using backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    // [Authorize(Roles = "SuperAdmin")]
     public class AuthController : ControllerBase
     {
         private readonly AuthService _authService;
@@ -16,6 +16,7 @@ namespace backend.Controllers
             _authService = authService;
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost("create-user")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
         {
@@ -29,7 +30,8 @@ namespace backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {

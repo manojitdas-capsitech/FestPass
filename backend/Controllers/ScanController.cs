@@ -8,7 +8,7 @@ namespace backend.Controllers
 
     [ApiController]
     [Route("api/scan")]
-    [Authorize(Roles = "Staff")]
+    [Authorize(Roles = "Staff, SuperAdmin, Admin")]
     public class ScanController : ControllerBase
     {
         private readonly ScanService _scanService;

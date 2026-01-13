@@ -18,7 +18,6 @@ namespace backend.Controllers
             _festService = festService;
         }
 
-        // SUPER ADMIN: Create Fest (Single API)
         [HttpPost]
         public async Task<IActionResult> CreateFest([FromBody] CreateFestDto dto)
         {
