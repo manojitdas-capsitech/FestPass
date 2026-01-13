@@ -1,6 +1,28 @@
-# Ignore appsettings files
+# ===== .NET build output =====
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Debug / Release folders
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio cache
+.vs/
+
+# Rider / VSCode
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# ===== App settings =====
 appsettings.json
 appsettings.Development.json
-
-# Optional: ignore all environment-specific appsettings
 appsettings.*.json
