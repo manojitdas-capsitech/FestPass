@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using backend.DTOs;
 using backend.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -30,7 +31,7 @@ namespace backend.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
@@ -42,12 +43,30 @@ namespace backend.Controllers
             new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
+                Secure = false,
+                SameSite = SameSiteMode.None,
                 Expires = DateTimeOffset.UtcNow.AddHours(8)
             }
         );
             return Ok(response);
+        }
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult Me()
+        {
+            var email = User.FindFirst(ClaimTypes.Email)?.Value
+                     ?? User.FindFirst("email")?.Value;
+
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (email == null || role == null)
+                return Unauthorized();
+
+            return Ok(new
+            {
+                email,
+                role
+            });
         }
     }
 }
