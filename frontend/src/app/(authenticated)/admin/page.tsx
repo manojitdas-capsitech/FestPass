@@ -1,9 +1,16 @@
-import React from 'react'
+"use client"
+import { useLogout } from '@/src/services/auth/auth.hooks'
 
-const page = () => {
+const AdminPage = () => {
+
+  const { mutate: logout } = useLogout();
+
   return (
-    <div>admin page</div>
+    <div>
+      <h2>admin page</h2>
+      <button onClick={() => logout()}>Logout</button>
+    </div>
   )
 }
 
-export default page
+export default AdminPage

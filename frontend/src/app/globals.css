@@ -1,1 +1,44 @@
 @import "tailwindcss";
+
+.hero-gradient {
+  background: radial-gradient(
+      circle at top left,
+      rgba(139, 92, 246, 0.35),
+      rgba(0, 0, 0, 0.85) 55%
+    ),
+    linear-gradient(180deg, #12091f 0%, #050507 100%);
+}
+
+.login-gradient {
+  background: radial-gradient(
+      circle at top left,
+      rgba(139, 92, 246, 0.25),
+      rgba(0, 0, 0, 0.9) 60%
+    ),
+    linear-gradient(180deg, #0b0b0f 0%, #050507 100%);
+}
+
+/* Shared input style */
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: #6b7280;
+}
+
+.input-field:hover {
+  background: #000;
+}
+
+.input-field:focus {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4);
+  background: rgba(214, 15, 15, 0.03);
+}

@@ -1,11 +1,9 @@
-import ProtectedRoute from "@/src/components/auth/ProtectedRoute";
+import React from 'react'
 
-
-
-export default function SuperAdminPage() {
+const page = () => {
   return (
-    <ProtectedRoute roles={["SuperAdmin"]}>
-      <h1>Super Admin Dashboard</h1>
-    </ProtectedRoute>
-  );
+    <div>super admin page</div>
+  )
 }
+
+export default page

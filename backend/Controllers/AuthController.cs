@@ -17,8 +17,7 @@ namespace backend.Controllers
             _authService = authService;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
-        [HttpPost("create-user")]
+        [HttpPost("register")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
         {
             try
@@ -44,7 +43,7 @@ namespace backend.Controllers
             {
                 HttpOnly = true,
                 Secure = false,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Lax,
                 Expires = DateTimeOffset.UtcNow.AddHours(8)
             }
         );
@@ -67,6 +66,20 @@ namespace backend.Controllers
                 email,
                 role
             });
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("access_token", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.Lax
+            });
+
+            return Ok(new { message = "Logged out successfully" });
         }
     }
 }
